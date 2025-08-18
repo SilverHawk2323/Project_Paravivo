@@ -18,13 +18,9 @@ USTRUCT(BlueprintType)
 struct FComboTransition
 {
 	GENERATED_BODY()
+	// e.g., "Light_2"
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combo")
-	FName NextNodeId;   // e.g., "Light_2"
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combo")
-	float MinTime = 0.15f; // earliest input accept
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combo")
-	float MaxTime = 0.45f; // latest input accept
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combo")
+	FName NextNodeId;   
 	bool bAllowDirectionalSwitch = true;
 };
 

@@ -25,22 +25,6 @@ public:
 	// Sets default values for this component's properties
 	UComboComponent();
 
-	// Called to start a combo sequence from the first node.
-	UFUNCTION(BlueprintCallable, Category = "Combo")
-	void StartCombo(FName FirstNodeId);
-
-	// Called when the player presses the attack button during a combo.
-	UFUNCTION(BlueprintCallable, Category = "Combo")
-	void QueueNextCombo(FName NextNodeId);
-
-	// Resets Combo back to idle state.
-	UFUNCTION(BlueprintCallable, Category = "Combo")
-	void ResetCombo();
-
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
 	// The combo data asset that defines all possible combo moves for this character.
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combo")
 	UComboDataAsset* ComboData;
@@ -48,8 +32,26 @@ protected:
 	//the currently active combo node (nullptr if idle).
 	const FComboNode* CurrentNode;
 
-	//Whether we are currently inside a combo animation's input window where the next attack can be queued.
-	bool bCanQueueNext;
+	//The next node requested from input
+	const FComboNode* QueuedNode;
+
+	UFUNCTION(BlueprintCallable)
+	void HandleAttackInput();
+
+	void StartCombo(const FComboNode* FirstNode);
+	void QueueNextCombo(FName DesiredNextId);
+	void PlayComboNode(const FComboNode* Node);
+
+	UFUNCTION(BlueprintCallable)
+	void OnComboWindowOpened();
+
+	UFUNCTION(BlueprintCallable)
+	void OnComboWindowClosed();
+
+protected:
+	// Called when the game starts
+	virtual void BeginPlay() override;
+
 
 public:	
 	// Called every frame

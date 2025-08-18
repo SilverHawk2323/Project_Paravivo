@@ -5,6 +5,7 @@
 #include "ComboSystem/ComboDataAsset.h"
 #include "FComboNode.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/Character.h"
 #include "Animation/AnimInstance.h"
 
 // Sets default values for this component's properties
@@ -14,70 +15,72 @@ UComboComponent::UComboComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
 	CurrentNode = nullptr;
-	bCanQueueNext = false;
 
 	// ...
 }
 
-void UComboComponent::StartCombo(FName FirstNodeId)
+void UComboComponent::HandleAttackInput()
 {
-	if (!ComboData)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("No combo data assigned."));
-		return;
-	}
+	if (!ComboData) return;
 
-	// Look up the first node in the combo set
-	CurrentNode = ComboData->FindNodeById(FirstNodeId);
-
+	//If we're already mid combo...
 	if (CurrentNode)
 	{
-		// Play the animation montage for the first node
-		if (AActor* Owner = GetOwner())
+		//...Queue next move
+		if (CurrentNode->Transitions.Num() > 0)
 		{
-			if (UAnimInstance* AnimInst = Owner->FindComponentByClass<USkeletalMeshComponent>()->GetAnimInstance())
-			{
-				AnimInst->Montage_Play(CurrentNode->Montage);
-			}
+			QueueNextCombo(CurrentNode->Transitions[0].NextNodeId);
 		}
-
-		// Allow queuing for next input during this animation's hit window
-		bCanQueueNext = true;
+	}
+	//If we're not mid combo...
+	else if (ComboData->ComboNodes.Num() > 0)
+	{
+		//...Start a combo
+		StartCombo(&ComboData->ComboNodes[0]);
 	}
 }
 
-void UComboComponent::QueueNextCombo(FName NextNodeId)
+void UComboComponent::StartCombo(const FComboNode* FirstNode)
 {
-	if (!bCanQueueNext || !ComboData)
-	{
-		return; // Can't queue next attack yet
-	}
+	PlayComboNode(FirstNode);
+}
 
-	const FComboNode* NextNode = ComboData->FindNodeById(NextNodeId);
+void UComboComponent::QueueNextCombo(FName DesiredNextId)
+{
+	const FComboNode* NextNode = ComboData->FindNodeById(DesiredNextId);
 	if (NextNode)
 	{
-		// Transition to next attack
-		CurrentNode = NextNode;
-
-		if (AActor* Owner = GetOwner())
-		{
-			if (UAnimInstance* AnimInst = Owner->FindComponentByClass<USkeletalMeshComponent>()->GetAnimInstance())
-			{
-				AnimInst->Montage_Play(CurrentNode->Montage);
-			}
-		}
-
-		// Reset queue window until next animation allows it again
-		bCanQueueNext = false;
+		QueuedNode = NextNode;
 	}
 }
 
-void UComboComponent::ResetCombo()
+void UComboComponent::PlayComboNode(const FComboNode* Node)
 {
-	CurrentNode = nullptr;
-	bCanQueueNext = false;
+	if (!Node || !Node->Montage) return;
+
+	CurrentNode = Node;
+	QueuedNode = nullptr; // clear it so it doesn't re-play or block new inputs
+
+	ACharacter* OwnerChar = Cast<ACharacter>(GetOwner());
+	if (OwnerChar && OwnerChar->GetMesh() && OwnerChar->GetMesh()->GetAnimInstance())
+	{
+		OwnerChar->GetMesh()->GetAnimInstance()->Montage_Play(Node->Montage);
+	}
 }
 
+void UComboComponent::OnComboWindowOpened()
+{
+	if (QueuedNode)
+	{
+		PlayComboNode(QueuedNode);
+	}
+}
+
+void UComboComponent::OnComboWindowClosed()
+{
+	QueuedNode = nullptr; // clear it so it doesn't play or block new inputs
+	CurrentNode = nullptr; // clear when the window closes and the combo is reset
+}
 
 // Called when the game starts
 void UComboComponent::BeginPlay()
