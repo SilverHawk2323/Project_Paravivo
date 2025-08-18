@@ -18,7 +18,7 @@ USTRUCT(BlueprintType)
 struct FComboTransition
 {
 	GENERATED_BODY()
-	// e.g., "Light_2"
+	// e.g., "Attack 2"
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combo")
 	FName NextNodeId;   
 	bool bAllowDirectionalSwitch = true;

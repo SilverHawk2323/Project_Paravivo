@@ -15,6 +15,7 @@ UComboComponent::UComboComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
 	CurrentNode = nullptr;
+	QueuedNode = nullptr;
 
 	// ...
 }
@@ -23,7 +24,7 @@ void UComboComponent::HandleAttackInput()
 {
 	if (!ComboData) return;
 
-	//If we're already mid combo...
+	//If we're already mid-combo...
 	if (CurrentNode)
 	{
 		//...Queue next move
@@ -32,7 +33,7 @@ void UComboComponent::HandleAttackInput()
 			QueueNextCombo(CurrentNode->Transitions[0].NextNodeId);
 		}
 	}
-	//If we're not mid combo...
+	//If we're not mid-combo...
 	else if (ComboData->ComboNodes.Num() > 0)
 	{
 		//...Start a combo
