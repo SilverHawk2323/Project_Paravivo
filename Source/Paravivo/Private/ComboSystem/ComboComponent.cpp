@@ -56,7 +56,7 @@ void UComboComponent::QueueNextCombo(FName DesiredNextId)
 
 void UComboComponent::PlayComboNode(const FComboNode* Node)
 {
-	if (!Node || !Node->Montage) return;
+	if (!Node || !Node->AttackMontage) return;
 
 	CurrentNode = Node;
 	QueuedNode = nullptr; // clear it so it doesn't re-play or block new inputs
@@ -64,7 +64,7 @@ void UComboComponent::PlayComboNode(const FComboNode* Node)
 	ACharacter* OwnerChar = Cast<ACharacter>(GetOwner());
 	if (OwnerChar && OwnerChar->GetMesh() && OwnerChar->GetMesh()->GetAnimInstance())
 	{
-		OwnerChar->GetMesh()->GetAnimInstance()->Montage_Play(Node->Montage);
+		OwnerChar->GetMesh()->GetAnimInstance()->Montage_Play(Node->AttackMontage);
 	}
 }
 

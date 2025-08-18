@@ -24,38 +24,22 @@ struct FComboTransition
 	bool bAllowDirectionalSwitch = true;
 };
 
-USTRUCT(BlueprintType)
-struct FHitWindow
-{
-	GENERATED_BODY()
-	UPROPERTY(EditAnywhere)
-	float StartTime = 0.18f;
-	UPROPERTY(EditAnywhere)
-	float EndTime = 0.33f;
-	UPROPERTY(EditAnywhere)
-	float Radius = 65.f;
-	UPROPERTY(EditAnywhere)
-	float Range = 180.f;
-	UPROPERTY(EditAnywhere)
-	FName Socket = "hand_r";
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<UDamageType> DamageType;
-	UPROPERTY(EditAnywhere)
-	float Damage = 15.f;
-};
 
 USTRUCT(BlueprintType)
 struct FComboNode
 {
 	GENERATED_BODY()
+	// "Light_1"
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combo")
-	FName Id; // "Light_1"
+	FName Id;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combo")
-	UAnimMontage* Montage; // anim that plays
+	float DamageAmount;
+	// anim that plays
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combo")
+	UAnimMontage* AttackMontage; 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combo")
 	bool bUseRootMotion = true;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combo")
-	TArray<FHitWindow> HitWindows;
+	// The next attack that can play
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combo")
 	TArray<FComboTransition> Transitions;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combo")
