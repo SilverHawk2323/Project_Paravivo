@@ -4,6 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "ComboSystem/ComboDataAsset.h"
+#include "FComboNode.h"
+#include "GameFramework/Actor.h"
+#include "GameFramework/Character.h"
+#include "Animation/AnimInstance.h"
 
 #include "ComboComponent.generated.h"
 

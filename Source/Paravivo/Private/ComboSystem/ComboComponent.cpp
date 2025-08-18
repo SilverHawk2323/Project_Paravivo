@@ -2,11 +2,7 @@
 
 
 #include "ComboSystem/ComboComponent.h"
-#include "ComboSystem/ComboDataAsset.h"
-#include "FComboNode.h"
-#include "GameFramework/Actor.h"
-#include "GameFramework/Character.h"
-#include "Animation/AnimInstance.h"
+
 
 // Sets default values for this component's properties
 UComboComponent::UComboComponent()
@@ -16,6 +12,7 @@ UComboComponent::UComboComponent()
 	PrimaryComponentTick.bCanEverTick = false;
 	CurrentNode = nullptr;
 	QueuedNode = nullptr;
+	ComboData = nullptr;
 
 	// ...
 }
