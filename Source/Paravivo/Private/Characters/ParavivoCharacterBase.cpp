@@ -11,6 +11,11 @@ AParavivoCharacterBase::AParavivoCharacterBase()
 
 }
 
+UAbilitySystemComponent* AParavivoCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 // Called when the game starts or when spawned
 void AParavivoCharacterBase::BeginPlay()
 {

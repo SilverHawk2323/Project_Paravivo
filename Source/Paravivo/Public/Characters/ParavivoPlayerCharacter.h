@@ -13,5 +13,14 @@ UCLASS()
 class PARAVIVO_API AParavivoPlayerCharacter : public AParavivoCharacterBase
 {
 	GENERATED_BODY()
-	
+
+
+public:
+	AParavivoPlayerCharacter();
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+
+private:
+	void InitAbilityActorInfo();
 };
+

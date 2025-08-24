@@ -1,22 +1,24 @@
-// Copyright Paravivo
+﻿// Copyright Paravivo
 
 
-#include "Characters/ParavivoEnemyBase.h"
+#include "Player/ParavivoPlayerState.h"
 
 #include "DamageableAttributeSet.h"
 #include "AbilitySystem/ParavivoAbilitySystemComponent.h"
 
-AParavivoEnemyBase::AParavivoEnemyBase()
+AParavivoPlayerState::AParavivoPlayerState()
 {
 	AbilitySystemComponent = CreateDefaultSubobject<UParavivoAbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
-	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Full);
 
 	AttributeSet = CreateDefaultSubobject<UDamageableAttributeSet>("AttributeSet");
+
+	
+	SetNetUpdateFrequency(100.f);
 }
 
-void AParavivoEnemyBase::BeginPlay()
+UAbilitySystemComponent* AParavivoPlayerState::GetAbilitySystemComponent() const
 {
-	Super::BeginPlay();
-	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	return AbilitySystemComponent;
 }

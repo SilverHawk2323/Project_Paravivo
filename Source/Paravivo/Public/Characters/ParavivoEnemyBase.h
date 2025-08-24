@@ -13,5 +13,11 @@ UCLASS()
 class PARAVIVO_API AParavivoEnemyBase : public AParavivoCharacterBase
 {
 	GENERATED_BODY()
+
+	public:
+	AParavivoEnemyBase();
+
 	
+protected:
+	virtual void BeginPlay() override;
 };
