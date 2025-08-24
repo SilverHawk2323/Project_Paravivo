@@ -2,9 +2,8 @@
 
 
 #include "Characters/ParavivoEnemyBase.h"
-
-#include "DamageableAttributeSet.h"
 #include "AbilitySystem/ParavivoAbilitySystemComponent.h"
+#include "AbilitySystem/ParavivoAttributeSet.h"
 
 AParavivoEnemyBase::AParavivoEnemyBase()
 {
@@ -12,7 +11,7 @@ AParavivoEnemyBase::AParavivoEnemyBase()
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
-	AttributeSet = CreateDefaultSubobject<UDamageableAttributeSet>("AttributeSet");
+	AttributeSet = CreateDefaultSubobject<UParavivoAttributeSet>("AttributeSet");
 }
 
 void AParavivoEnemyBase::BeginPlay()

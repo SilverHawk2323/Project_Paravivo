@@ -2,9 +2,8 @@
 
 
 #include "Player/ParavivoPlayerState.h"
-
-#include "DamageableAttributeSet.h"
 #include "AbilitySystem/ParavivoAbilitySystemComponent.h"
+#include "AbilitySystem/ParavivoAttributeSet.h"
 
 AParavivoPlayerState::AParavivoPlayerState()
 {
@@ -12,7 +11,7 @@ AParavivoPlayerState::AParavivoPlayerState()
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Full);
 
-	AttributeSet = CreateDefaultSubobject<UDamageableAttributeSet>("AttributeSet");
+	AttributeSet = CreateDefaultSubobject<UParavivoAttributeSet>("AttributeSet");
 
 	
 	SetNetUpdateFrequency(100.f);
