@@ -20,8 +20,11 @@ void AParavivoPlayerController::BeginPlay()
 
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(
 		GetLocalPlayer());
-	check(Subsystem);
-	Subsystem->AddMappingContext(InputContext, 0);
+	if (Subsystem)
+	{
+		Subsystem->AddMappingContext(InputContext, 0);
+	}
+	
 
 	bShowMouseCursor = false;
 	DefaultMouseCursor = EMouseCursor::Default;

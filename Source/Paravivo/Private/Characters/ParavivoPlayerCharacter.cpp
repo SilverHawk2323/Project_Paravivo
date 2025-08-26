@@ -4,7 +4,9 @@
 #include "Characters/ParavivoPlayerCharacter.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Player/ParavivoPlayerController.h"
 #include "Player/ParavivoPlayerState.h"
+#include "UI/HUD/ParavivoHUD.h"
 
 AParavivoPlayerCharacter::AParavivoPlayerCharacter()
 {
@@ -24,7 +26,7 @@ void AParavivoPlayerCharacter::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
 
-	//// Init ability actor info for the Client
+	// Init ability actor info for the Client
 	InitAbilityActorInfo();
 }
 
@@ -36,4 +38,12 @@ void AParavivoPlayerCharacter::InitAbilityActorInfo()
 	ParavivoPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(ParavivoPlayerState, this);
 	AbilitySystemComponent = ParavivoPlayerState->GetAbilitySystemComponent();
 	AttributeSet = ParavivoPlayerState->GetAttributeSet();
+
+	if (AParavivoPlayerController* ParavivoPlayerController = Cast<AParavivoPlayerController>(GetController()))
+	{
+		if (AParavivoHUD* ParavivoHUD = Cast<AParavivoHUD>(ParavivoPlayerController->GetHUD()))
+		{
+			ParavivoHUD->InitOverlay(ParavivoPlayerController, ParavivoPlayerState, AbilitySystemComponent, AttributeSet);
+		}
+	}
 }

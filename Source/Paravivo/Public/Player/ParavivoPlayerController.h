@@ -8,6 +8,7 @@
 
 class UInputMappingContext;
 class UInputAction;
+class UComboComponent;
 
 /**
  * 

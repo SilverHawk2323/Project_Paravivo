@@ -7,9 +7,9 @@
 
 UParavivoAttributeSet::UParavivoAttributeSet()
 {
-	InitHealth(100.f);
+	InitHealth(50.f);
 	InitMaxHealth(100.f);
-	InitBlood(100.f);
+	InitBlood(50.f);
 	InitMaxBlood(100.f);
 }
 
