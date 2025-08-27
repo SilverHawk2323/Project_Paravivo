@@ -20,4 +20,5 @@ class PARAVIVO_API AParavivoEnemyBase : public AParavivoCharacterBase
 	
 protected:
 	virtual void BeginPlay() override;
+	virtual void InitAbilityActorInfo() override;
 };

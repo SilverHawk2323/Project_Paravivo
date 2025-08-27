@@ -17,5 +17,12 @@ AParavivoEnemyBase::AParavivoEnemyBase()
 void AParavivoEnemyBase::BeginPlay()
 {
 	Super::BeginPlay();
+	InitAbilityActorInfo();
+}
+
+void AParavivoEnemyBase::InitAbilityActorInfo()
+{
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	Cast<UParavivoAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
+	
 }

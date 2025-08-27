@@ -27,7 +27,21 @@ void UParavivoAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimePro
 	DOREPLIFETIME_CONDITION_NOTIFY(UParavivoAttributeSet,MaxBlood, COND_None, REPNOTIFY_Always);
 }
 
-void UParavivoAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
+void UParavivoAttributeSet::PreAttributeBaseChange(const FGameplayAttribute& Attribute, float& NewValue) const
+{
+	Super::PreAttributeBaseChange(Attribute, NewValue);
+
+	if (Attribute == GetHealthAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.0f, GetMaxHealth());
+	}
+	if (Attribute == GetBloodAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.0f, GetMaxBlood());
+	}
+}
+// old method UE 5.3 and over use PreAttributeBaseChange
+/*void UParavivoAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
 {
 	Super::PreAttributeChange(Attribute, NewValue);
 
@@ -39,7 +53,7 @@ void UParavivoAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribu
 	{
 		NewValue = FMath::Clamp(NewValue, 0.0f, GetMaxBlood());
 	}
-}
+}*/
 
 void UParavivoAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data)
 {

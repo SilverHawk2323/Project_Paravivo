@@ -22,3 +22,8 @@ void AParavivoCharacterBase::BeginPlay()
 	Super::BeginPlay();
 	
 }
+
+void AParavivoCharacterBase::InitAbilityActorInfo()
+{
+	
+}

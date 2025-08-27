@@ -3,6 +3,7 @@
 
 #include "Characters/ParavivoPlayerCharacter.h"
 
+#include "AbilitySystem/ParavivoAbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/ParavivoPlayerController.h"
 #include "Player/ParavivoPlayerState.h"
@@ -36,6 +37,7 @@ void AParavivoPlayerCharacter::InitAbilityActorInfo()
 	AParavivoPlayerState* ParavivoPlayerState = GetPlayerState<AParavivoPlayerState>();
 	check(ParavivoPlayerState);
 	ParavivoPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(ParavivoPlayerState, this);
+	Cast<UParavivoAbilitySystemComponent>(ParavivoPlayerState->GetAbilitySystemComponent())->AbilityActorInfoSet();
 	AbilitySystemComponent = ParavivoPlayerState->GetAbilitySystemComponent();
 	AttributeSet = ParavivoPlayerState->GetAttributeSet();
 
