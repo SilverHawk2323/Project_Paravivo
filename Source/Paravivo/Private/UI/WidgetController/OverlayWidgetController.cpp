@@ -21,16 +21,36 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 	const UParavivoAttributeSet* ParavivoAttributeSet = CastChecked<UParavivoAttributeSet>(AttributeSet);
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		ParavivoAttributeSet->GetHealthAttribute()).AddUObject(this, &UOverlayWidgetController::HealthChanged);
+		ParavivoAttributeSet->GetHealthAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+		{
+				OnHealthChanged.Broadcast(Data.NewValue);
+		}
+	);
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		ParavivoAttributeSet->GetMaxHealthAttribute()).AddUObject(this, &UOverlayWidgetController::MaxHealthChanged);
+		ParavivoAttributeSet->GetMaxHealthAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+		{
+				OnMaxHealthChanged.Broadcast(Data.NewValue);
+		}
+	);
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		ParavivoAttributeSet->GetBloodAttribute()).AddUObject(this, &UOverlayWidgetController::BloodChanged);
+		ParavivoAttributeSet->GetBloodAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+		{
+				OnBloodChanged.Broadcast(Data.NewValue);
+		}
+		);
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		ParavivoAttributeSet->GetMaxBloodAttribute()).AddUObject(this, &UOverlayWidgetController::MaxBloodChanged);
+		ParavivoAttributeSet->GetMaxBloodAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+		{
+				OnMaxBloodChanged.Broadcast(Data.NewValue);
+		}
+		);
 
 	Cast<UParavivoAbilitySystemComponent>(AbilitySystemComponent)->EffectAssetTags.AddLambda(
 		[this](const FGameplayTagContainer& AssetTags)
@@ -51,24 +71,4 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 			}
 		}
 	);
-}
-
-void UOverlayWidgetController::HealthChanged(const FOnAttributeChangeData& Data) const
-{
-	OnHealthChanged.Broadcast(Data.NewValue);
-}
-
-void UOverlayWidgetController::MaxHealthChanged(const FOnAttributeChangeData& Data) const
-{
-	OnMaxHealthChanged.Broadcast(Data.NewValue);
-}
-
-void UOverlayWidgetController::BloodChanged(const FOnAttributeChangeData& Data) const
-{
-	OnBloodChanged.Broadcast(Data.NewValue);
-}
-
-void UOverlayWidgetController::MaxBloodChanged(const FOnAttributeChangeData& Data) const
-{
-	OnMaxBloodChanged.Broadcast(Data.NewValue);
 }
