@@ -61,6 +61,13 @@ void UParavivoAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffe
 
 	FEffectProperties Props;
 	SetEffectProperties(Data, Props);
+
+	if (Data.EvaluatedData.Attribute == GetBloodAttribute())
+	{
+		GEngine->AddOnScreenDebugMessage(1,3.f,FColor::Red,FString::Printf(TEXT("Blood: %f"), GetBlood()));
+		SetHealth(FMath::Clamp(GetHealth(),0.f,GetMaxHealth()));
+		SetBlood(FMath::Clamp(GetBlood(),0.f,GetMaxBlood()));
+	}
 }
 
 void UParavivoAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const

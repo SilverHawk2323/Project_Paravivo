@@ -53,30 +53,39 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Applied Effects")
 	bool bDestroyOnEffectRemoval = false;
 
+	/** Policy for instant effects (apply instantly, no duration) */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Applied Effects")
 	EEffectApplicationPolicy InstantEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
-	
+
+	/** Class for instant effects (apply instantly, no duration) */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Applied Effects")
 	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
 
+	/** Policy for timed effects (apply for fixed duration) */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Applied Effects")
 	EEffectApplicationPolicy DurationEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
-	
+
+	/** Class for timed effects (apply for fixed duration) */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Applied Effects")
 	TSubclassOf<UGameplayEffect> DurationGameplayEffectClass;
 
+	/** Policy for infinite effects (stay active until manually removed) */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Applied Effects")
 	EEffectApplicationPolicy InfiniteEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
-	
+
+	/** Class for infinite effects (stay active until manually removed) */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Applied Effects")
 	TSubclassOf<UGameplayEffect> InfiniteGameplayEffectClass;
 
+	/** Defines if/when infinite effects are removed (e.g., on end overlap) */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Applied Effects")
 	EEffectRemovalPolicy InfiniteEffectRemovalPolicy = EEffectRemovalPolicy::RemoveOnEndOverlap;
 
+	/** Tracks active infinite effects + which ASC they're applied to (so we can remove later) */
 	UPROPERTY()
 	TMap<FActiveGameplayEffectHandle, UAbilitySystemComponent*> ActiveEffectHandles;
 
+	/** Actor level used when creating effect specs (affects scaling) */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Applied Effects")
 	float ActorLevel = 1.f;
 };
