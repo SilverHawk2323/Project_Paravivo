@@ -6,6 +6,7 @@
 #include "AbilitySystemComponent.h"
 #include "ParavivoAbilitySystemComponent.generated.h"
 
+DECLARE_MULTICAST_DELEGATE_OneParam(FEffectAssetTags, const FGameplayTagContainer&/*AssetTags*/)
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class PARAVIVO_API UParavivoAbilitySystemComponent : public UAbilitySystemComponent
@@ -14,6 +15,8 @@ class PARAVIVO_API UParavivoAbilitySystemComponent : public UAbilitySystemCompon
 	
 public:
 	void AbilityActorInfoSet();
+
+	FEffectAssetTags EffectAssetTags;
 	
 protected:
 

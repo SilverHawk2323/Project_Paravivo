@@ -3,6 +3,7 @@
 
 #include "UI/WidgetController/OverlayWidgetController.h"
 
+#include "AbilitySystem/ParavivoAbilitySystemComponent.h"
 #include "AbilitySystem/ParavivoAttributeSet.h"
 
 void UOverlayWidgetController::BroadcastInitialValues()
@@ -30,6 +31,18 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
 		ParavivoAttributeSet->GetMaxBloodAttribute()).AddUObject(this, &UOverlayWidgetController::MaxBloodChanged);
+
+	Cast<UParavivoAbilitySystemComponent>(AbilitySystemComponent)->EffectAssetTags.AddLambda(
+		[](const FGameplayTagContainer& AssetTags)
+	{
+			for (const FGameplayTag& Tag : AssetTags)
+			{
+					const FString Msg = FString::Printf(TEXT("GE Tag: %s"), *Tag.ToString());
+					GEngine->AddOnScreenDebugMessage(-1, 8.f, FColor::Red, Msg);
+			}
+			
+	}
+	);
 }
 
 void UOverlayWidgetController::HealthChanged(const FOnAttributeChangeData& Data) const
