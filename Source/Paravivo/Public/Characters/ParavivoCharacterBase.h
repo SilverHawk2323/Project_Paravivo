@@ -9,6 +9,7 @@
 #include "ParavivoCharacterBase.generated.h"
 
 class UAttributeSet;
+class UGameplayAbility;
 UCLASS(Abstract)
 class PARAVIVO_API AParavivoCharacterBase : public ACharacter, public IAbilitySystemInterface
 {
@@ -39,5 +40,10 @@ protected:
 	
 	virtual void InitAbilityActorInfo();
 
-	
+	void AddCharacterAbilities();
+
+private:
+
+	UPROPERTY(EditAnywhere, Category="GAS|Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 };

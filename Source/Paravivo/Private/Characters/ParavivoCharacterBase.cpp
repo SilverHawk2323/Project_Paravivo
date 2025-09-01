@@ -3,6 +3,8 @@
 
 #include "Characters/ParavivoCharacterBase.h"
 
+#include "AbilitySystem/ParavivoAbilitySystemComponent.h"
+
 // Sets default values
 AParavivoCharacterBase::AParavivoCharacterBase()
 {
@@ -40,6 +42,14 @@ void AParavivoCharacterBase::InitializeDefaultAttributes() const
 void AParavivoCharacterBase::InitAbilityActorInfo()
 {
 	
+}
+
+void AParavivoCharacterBase::AddCharacterAbilities()
+{
+	UParavivoAbilitySystemComponent* ParavivoASC = CastChecked<UParavivoAbilitySystemComponent>(AbilitySystemComponent);
+	if (!HasAuthority()) return;
+
+	ParavivoASC->AddCharacterAbilities(StartupAbilities);
 }
 
 

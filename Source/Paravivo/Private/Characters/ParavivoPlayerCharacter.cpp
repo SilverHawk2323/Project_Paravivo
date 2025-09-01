@@ -29,6 +29,7 @@ void AParavivoPlayerCharacter::OnRep_PlayerState()
 
 	// Init ability actor info for the Client
 	InitAbilityActorInfo();
+	AddCharacterAbilities();
 }
 
 void AParavivoPlayerCharacter::InitAbilityActorInfo()
