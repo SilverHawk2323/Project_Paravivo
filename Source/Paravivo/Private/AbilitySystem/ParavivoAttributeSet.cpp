@@ -12,9 +12,7 @@
 UParavivoAttributeSet::UParavivoAttributeSet()
 {
 	InitHealth(50.f);
-	InitMaxHealth(100.f);
 	InitBlood(50.f);
-	InitMaxBlood(100.f);
 }
 
 void UParavivoAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const

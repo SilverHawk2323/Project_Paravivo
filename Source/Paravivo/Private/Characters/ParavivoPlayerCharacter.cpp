@@ -48,4 +48,5 @@ void AParavivoPlayerCharacter::InitAbilityActorInfo()
 			ParavivoHUD->InitOverlay(ParavivoPlayerController, ParavivoPlayerState, AbilitySystemComponent, AttributeSet);
 		}
 	}
+	InitializeDefaultAttributes();
 }
