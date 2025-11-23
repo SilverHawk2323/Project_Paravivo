@@ -9,9 +9,22 @@
   <component name="ChangeListManager">
     <list default="true" id="b76fe24d-83ba-4ccd-93a9-34ff90560011" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Paravivo.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Paravivo.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AbilitySystem/GameplayAbilities/GA_MeleeAttack_Base.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AbilitySystem/GameplayAbilities/GA_MeleeAttack_Base.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AbilitySystem/GameplayAbilities/GA_MeleeAttack_Punch.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AbilitySystem/GameplayAbilities/GA_MeleeAttack_Punch.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprint/AbilitySystem/GameplayAbilities/GA_MeleeAttack_PunchCombo.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AbilitySystem/GameplayAbilities/GA_MeleeAttack_PunchCombo.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprint/BP_EnemyBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/BP_EnemyBase.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/AbilitySystem/GameplayEffects/DamageEffects/GE_InstantDamage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/AbilitySystem/GameplayEffects/DamageEffects/GE_InstantDamage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/BP_EnemyBase.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/BP_EnemyMelee.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DamageSystem/Attacks/BPC_Attacks.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DamageSystem/Attacks/BPC_Attacks.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DamageSystem/BPC_DamageSystem.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DamageSystem/BPC_DamageSystem.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DamageSystem/BPI_Damageable.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DamageSystem/BPI_Damageable.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DamageSystem/E_DamageType.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DamageSystem/E_DamageType.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprint/DamageSystem/S_DamageInfo.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprint/DamageSystem/S_DamageInfo.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Player/BP_PlayerCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Player/BP_PlayerCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Lvl_ThirdPerson/0/A0/B03GPEHL68PO9T6MPTYG2Z.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Lvl_ThirdPerson/0/A0/B03GPEHL68PO9T6MPTYG2Z.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Lvl_ThirdPerson/2/I7/GOFS5NJ24M13R1D4SIPF0V.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Lvl_ThirdPerson/2/I7/GOFS5NJ24M13R1D4SIPF0V.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Lvl_ThirdPerson/4/I2/9BBHOVHRBBDJZ8DHB65USG.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Lvl_ThirdPerson/4/I2/9BBHOVHRBBDJZ8DHB65USG.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Lvl_ThirdPerson/E/WP/6S4K8FNNIEQDSQSODZ70VK.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/ThirdPerson/Lvl_ThirdPerson/E/WP/6S4K8FNNIEQDSQSODZ70VK.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +38,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.6/Engine/Plugins/Runtime/GameplayAbilities/Source/GameplayAbilities/Private/AbilitySystemComponent.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/Actor.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.6/Engine/Source/Runtime/Engine/Private/KismetSystemLibrary.cpp" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -143,6 +157,7 @@
       <workItem from="1762914869887" duration="1752000" />
       <workItem from="1763176801346" duration="101000" />
       <workItem from="1763178405185" duration="10000" />
+      <workItem from="1763867012154" duration="1248000" />
     </task>
     <servers />
   </component>
