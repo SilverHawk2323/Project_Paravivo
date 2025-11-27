@@ -1,16 +1,14 @@
-// Copyright Paravivo
+// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystemComponent.h"
 #include "AbilitySystemInterface.h"
+#include "AbilitySystemComponent.h"
 #include "GameFramework/Character.h"
 #include "ParavivoCharacterBase.generated.h"
 
-class UAttributeSet;
-class UGameplayAbility;
-UCLASS(Abstract)
+UCLASS()
 class PARAVIVO_API AParavivoCharacterBase : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
@@ -18,32 +16,44 @@ class PARAVIVO_API AParavivoCharacterBase : public ACharacter, public IAbilitySy
 public:
 	// Sets default values for this character's properties
 	AParavivoCharacterBase();
-
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-	UAttributeSet* GetAttributeSet() const {return AttributeSet;}
+	
+	// Ability System Component
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AbilitySystem")
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="AbilitySystem")
+	class UBasicAttributeSet* BasicAttributeSet;
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AbilitySystem")
+	EGameplayEffectReplicationMode AscReplicationMode = EGameplayEffectReplicationMode::Mixed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AbilitySystem")
+	TArray<TSubclassOf<UGameplayAbility>> StartingAbilities;
+
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY()
-	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+	virtual void PossessedBy(AController* NewController) override;
 
-	UPROPERTY()
-	TObjectPtr<UAttributeSet> AttributeSet;
+	virtual void OnRep_PlayerState() override;
 
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
-	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributes;
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 
-	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const;
-	void InitializeDefaultAttributes() const;
-	
-	virtual void InitAbilityActorInfo();
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void AddCharacterAbilities();
+	UFUNCTION(BlueprintCallable, Category="AbilitySystem")
+	TArray<FGameplayAbilitySpecHandle> GrantAbilities(TArray<TSubclassOf<UGameplayAbility>> AbilitiesToGrant);
 
-private:
+	UFUNCTION(BlueprintCallable, Category="AbilitySystem")
+	void RemoveAbilities(TArray<FGameplayAbilitySpecHandle> AbilitiesToRemove);
 
-	UPROPERTY(EditAnywhere, Category="GAS|Abilities")
-	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+	UFUNCTION(BlueprintCallable, Category="AbilitySystem")
+	void SendAbilitiesChangedEvent();
 };
